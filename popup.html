@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TickPilot</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <header>
+        <div class="mark" aria-hidden="true"><span></span><span></span></div>
+        <div>
+          <p class="kicker">TechTickBot-style · mirror test</p>
+          <h1>TickPilot</h1>
+        </div>
+        <div id="live-pill" class="pill">STANDBY</div>
+      </header>
+
+      <section class="hero-card">
+        <div class="hero-top">
+          <p id="platform-label">Arena offline</p>
+          <strong id="step-count">0 / 4</strong>
+        </div>
+        <p id="page-title">Configure below, then open the mirror arena.</p>
+        <div class="track"><i id="progress-bar"></i></div>
+        <p id="status-message">Live sites: detect + settings only.</p>
+      </section>
+
+      <section class="panel">
+        <div class="row-head"><span>Platform</span></div>
+        <div class="seg">
+          <label><input type="radio" name="platform" value="hkt" checked /> HKTicketing</label>
+          <label><input type="radio" name="platform" value="kktix" /> KKTIX</label>
+        </div>
+        <p class="hint">Use Traditional Chinese on live HKTicketing and stay logged in.</p>
+      </section>
+
+      <section class="panel">
+        <div class="row-head"><span>General settings</span></div>
+        <div class="grid">
+          <label>Member number <input id="member-number" type="text" /></label>
+          <label>Preset / verification answer <input id="preset-answer" type="text" /></label>
+          <label class="check"><input id="auto-consent" type="checkbox" /> Automatic consent terms</label>
+          <label class="check"><input id="auto-start" type="checkbox" /> Auto start when page loads</label>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="row-head"><span>Function 1 · retry same fare</span></div>
+        <p class="hint">Select session, tier, qty manually first — bot retries same price.</p>
+        <label class="check"><input id="function1" type="checkbox" /> Enable Function 1</label>
+      </section>
+
+      <section class="panel">
+        <div class="row-head"><span>Function 2 · intelligent auto</span></div>
+        <div class="grid">
+          <label>Session index (1=first) <input id="session-index" type="number" min="1" max="9" value="1" /></label>
+          <label>Zone range <input id="zone-range" type="text" value="1-3" placeholder="2-3" /></label>
+          <label>KKTIX price index <input id="kktix-price" type="number" min="1" max="9" value="2" /></label>
+          <label>Quantity (1-10) <input id="quantity" type="number" min="1" max="10" value="2" /></label>
+          <label>Min HK$ <input id="min-price" type="number" min="0" value="0" /></label>
+          <label>Max HK$ <input id="max-price" type="number" min="0" value="100000" /></label>
+          <label class="check"><input id="skip-obstructed" type="checkbox" checked /> Skip obstructed view</label>
+          <label class="check"><input id="skip-wheelchair" type="checkbox" checked /> Skip wheelchair seats</label>
+          <label class="check"><input id="function2" type="checkbox" checked /> Enable Function 2</label>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="row-head"><span>Live assist · HKTicketing</span><span class="chip">MANUAL</span></div>
+        <p class="hint">Alerts while you buy manually on the live site. No auto-click or checkout.</p>
+        <div class="grid">
+          <label class="check"><input id="live-assist" type="checkbox" checked /> Enable live assist</label>
+          <label class="check"><input id="alert-stage" type="checkbox" checked /> Stage change alerts</label>
+          <label class="check"><input id="alert-select" type="checkbox" checked /> Select page open alert</label>
+          <label class="check"><input id="alert-tier" type="checkbox" checked /> Tier unlock alert</label>
+          <label class="check"><input id="alert-captcha" type="checkbox" checked /> Captcha alert</label>
+          <label class="check"><input id="alert-queue" type="checkbox" checked /> Queue host alert</label>
+          <label class="check"><input id="alert-payment" type="checkbox" checked /> Payment page alert</label>
+          <label class="check"><input id="alert-desktop" type="checkbox" checked /> Desktop notifications</label>
+          <label class="check"><input id="alert-sound" type="checkbox" checked /> Sound on critical alerts</label>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="row-head"><span>Timing</span></div>
+        <div class="grid">
+          <label>Retry interval
+            <select id="refresh-interval">
+              <option value="400">0.4s</option>
+              <option value="500" selected>0.5s</option>
+              <option value="1000">1s</option>
+            </select>
+          </label>
+          <label>Max tries <input id="max-retries" type="number" min="1" max="200" value="80" /></label>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="row-head"><span>Controls</span><span class="chip">MIRROR</span></div>
+        <div class="actions">
+          <button id="open-arena" type="button">Open mirror arena</button>
+          <button id="start-f2" class="primary green" type="button">Start Function 2</button>
+          <button id="start-f1" type="button">Start Function 1</button>
+          <button id="stop" type="button" disabled>Stop</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="row-head"><span>Controls</span><span class="chip live-chip">LIVE</span></div>
+        <p class="hint">Launch automation directly on the live HKTicketing/KKTIX site.</p>
+        <div class="actions">
+          <button id="start-live-f2" class="primary red" type="button">🚀 Live Function 2</button>
+          <button id="start-live-f1" type="button">🚀 Live Function 1</button>
+          <button id="stop-live" type="button" disabled>⏹ Stop Live</button>
+        </div>
+      </section>
+
+      <section class="panel log-panel">
+        <div class="row-head"><span>Activity</span><button id="clear-log" class="ghost" type="button">Clear</button></div>
+        <ul id="activity-log"><li class="empty">No activity yet.</li></ul>
+      </section>
+
+      <footer>Load unpacked: chrome-extension folder · Live auto-buy enabled</footer>
+    </div>
+    <script src="popup.js"></script>
+  </body>
+</html>

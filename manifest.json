@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "TickPilot",
+  "version": "1.4.0",
+  "description": "AI-powered ticket buying automation for HKTicketing, KKTIX, Cityline, and URBTIX. Live auto-buy + mirror arena.",
+  "permissions": ["storage", "tabs", "notifications"],
+  "host_permissions": [
+    "https://*.cityline.com/*",
+    "https://*.kktix.com/*",
+    "https://*.kktix.cc/*",
+    "https://*.urbtix.hk/*",
+    "https://ticket.urbtix.hk/*",
+    "https://*.hkticketing.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "TickPilot",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.cityline.com/*",
+        "https://*.kktix.com/*",
+        "https://*.kktix.cc/*",
+        "https://*.urbtix.hk/*",
+        "https://ticket.urbtix.hk/*",
+        "https://*.hkticketing.com/*"
+      ],
+      "js": ["lib/live-assist.js", "lib/live-auto.js", "content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
