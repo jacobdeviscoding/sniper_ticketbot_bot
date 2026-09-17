@@ -1,10 +1,10 @@
-#tickpilot-probe {
+#tickpilot-hud {
   position: fixed;
   right: 16px;
   bottom: 16px;
   z-index: 2147483646;
-  width: min(320px, calc(100vw - 24px));
-  max-height: min(70vh, 520px);
+  width: min(300px, calc(100vw - 24px));
+  max-height: min(60vh, 420px);
   overflow: auto;
   padding: 12px 14px;
   border: 1px solid #24574d;
@@ -14,345 +14,93 @@
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
 }
 
-#tickpilot-probe .tp-kicker {
-  margin: 0;
-  color: #3dffc4;
-  font-size: 10px;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-}
-
-#tickpilot-probe strong {
-  display: block;
-  margin: 4px 0 2px;
-  font-size: 18px;
-}
-
-#tickpilot-probe .tp-host {
-  margin: 0 0 6px;
-  color: #7f9a93;
-  font: 10px/1.3 Consolas, "Cascadia Mono", monospace;
-  word-break: break-all;
-}
-
-#tickpilot-probe .tp-note {
-  margin: 0 0 10px;
-  color: #7f9a93;
-}
-
-#tickpilot-probe .tp-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6px 10px;
-  margin: 0 0 10px;
-}
-
-#tickpilot-probe .tp-grid dt {
-  margin: 0;
-  color: #4d6f68;
-  font-size: 9px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-#tickpilot-probe .tp-grid dd {
-  margin: 1px 0 0;
-  color: #c5d8d2;
-  font-size: 11px;
-}
-
-#tickpilot-probe .tp-checklist {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  border-top: 1px solid #16322d;
-  padding-top: 8px;
-}
-
-#tickpilot-probe .tp-checklist li {
-  padding: 4px 0;
-  color: #f0c14b;
-  font-size: 11px;
-}
-
-#tickpilot-probe .tp-checklist li::before {
-  content: "→ ";
-  color: #3dffc4;
-}
-
-#tickpilot-live-settings {
-  position: fixed;
-  left: 16px;
-  top: 72px;
-  z-index: 2147483645;
-  width: min(300px, calc(100vw - 32px));
-  padding: 12px 14px;
-  border: 1px solid #24574d;
-  background: rgba(7, 18, 16, 0.94);
-  color: #e7f6f1;
-  font: 12px/1.4 Bahnschrift, "Segoe UI", sans-serif;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
-}
-
-#tickpilot-live-settings .tp-live-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 6px;
-}
-
-#tickpilot-live-settings .tp-live-badge {
-  padding: 2px 8px;
-  border-radius: 4px;
-  background: #16322d;
-  color: #7f9a93;
-  font-size: 10px;
-  letter-spacing: 1px;
-}
-
-#tickpilot-live-settings .tp-live-badge.on {
-  background: #14b8a6;
-  color: #07211c;
-}
-
-#tickpilot-live-settings .tp-live-note,
-#tickpilot-live-settings .tp-live-hint {
-  margin: 0 0 8px;
-  color: #7f9a93;
-  font-size: 11px;
-}
-
-#tickpilot-live-settings .tp-live-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6px 10px;
-  margin: 0 0 8px;
-}
-
-#tickpilot-live-settings .tp-live-grid dt {
-  margin: 0;
-  color: #4d6f68;
-  font-size: 9px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-#tickpilot-live-settings .tp-live-grid dd {
-  margin: 1px 0 0;
-  color: #c5d8d2;
-  font-size: 11px;
-}
-
-body.tp-bot-armed::before {
-  content: "BOT";
-  position: fixed;
-  top: 12px;
-  right: 12px;
-  z-index: 2147483647;
-  padding: 4px 10px;
-  background: #14b8a6;
-  color: #07211c;
-  font: 700 11px/1 Consolas, monospace;
-  letter-spacing: 1px;
-  border-radius: 4px;
-  pointer-events: none;
-}
-
-body.tp-assist-live::before {
-  content: "ASSIST";
-  position: fixed;
-  top: 12px;
-  right: 12px;
-  z-index: 2147483647;
-  padding: 4px 10px;
-  background: #1677ff;
-  color: #fff;
-  font: 700 11px/1 Consolas, monospace;
-  letter-spacing: 1px;
-  border-radius: 4px;
-  pointer-events: none;
-}
-
-#tickpilot-live-settings .tp-live-clock,
-#tickpilot-probe .tp-clock {
-  margin: 0 0 8px;
-  color: #ffd666;
-  font: 700 12px/1.3 Consolas, monospace;
-}
-
-#tickpilot-live-settings .tp-copy-member {
-  width: 100%;
-  margin-top: 6px;
-  padding: 6px 8px;
-  border: 1px solid #24574d;
-  background: #102820;
-  color: #3dffc4;
-  font-size: 11px;
-  cursor: pointer;
-}
-
-#tickpilot-live-settings .tp-live-badge.assist {
-  background: #1677ff;
-  color: #fff;
-}
-
-#tickpilot-alert-banner {
-  position: fixed;
-  top: 12px;
-  left: 50%;
-  transform: translateX(-50%) translateY(-120%);
-  z-index: 2147483647;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  max-width: min(560px, calc(100vw - 24px));
-  padding: 10px 14px;
-  border-radius: 8px;
-  font: 12px/1.4 Bahnschrift, "Segoe UI", sans-serif;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
-  transition: transform 0.25s ease;
-}
-
-#tickpilot-alert-banner.tp-banner-show {
-  transform: translateX(-50%) translateY(0);
-}
-
-#tickpilot-alert-banner strong {
-  white-space: nowrap;
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-#tickpilot-alert-banner button {
-  margin-left: auto;
-  border: 0;
-  background: transparent;
-  color: inherit;
-  font-size: 18px;
-  cursor: pointer;
-  opacity: 0.8;
-}
-
-#tickpilot-alert-banner.tp-banner-critical {
-  background: #fff1f0;
-  border: 1px solid #ffa39e;
-  color: #a8071a;
-  animation: tp-pulse 1.2s ease infinite;
-}
-
-#tickpilot-alert-banner.tp-banner-warn {
-  background: #fffbe6;
-  border: 1px solid #ffe58f;
-  color: #ad6800;
-}
-
-#tickpilot-alert-banner.tp-banner-info {
-  background: #e6f4ff;
-  border: 1px solid #91caff;
-  color: #0958d9;
-}
-
-@keyframes tp-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 77, 79, 0.35); }
-  50% { box-shadow: 0 0 0 8px rgba(255, 77, 79, 0); }
-}
-
-#tickpilot-probe .tp-probe-head {
+#tickpilot-hud .tp-hud-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
-#tickpilot-probe .tp-stage-pill {
+#tickpilot-hud .tp-hud-head strong {
+  font-size: 14px;
+  color: #3dffc4;
+}
+
+#tickpilot-hud .tp-hud-badge {
   padding: 2px 8px;
   border-radius: 999px;
+  background: #14b8a6;
+  color: #041510;
   font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.6px;
 }
 
-#tickpilot-probe .tp-pill-critical { background: #ff4d4f; color: #fff; }
-#tickpilot-probe .tp-pill-warn { background: #faad14; color: #1a1200; }
-#tickpilot-probe .tp-pill-info { background: #1677ff; color: #fff; }
-
-#tickpilot-probe .tp-action {
-  margin: 8px 0;
-  padding: 8px 10px;
-  background: #102820;
-  border-left: 3px solid #3dffc4;
-  color: #e7f6f1;
-  font-size: 12px;
-  line-height: 1.45;
+#tickpilot-hud .tp-hud-stage {
+  margin: 0 0 4px;
+  font-size: 18px;
+  font-weight: 700;
 }
 
-#tickpilot-probe .tp-progress-steps {
-  display: flex;
-  gap: 4px;
-  margin: 8px 0;
-}
-
-#tickpilot-probe .tp-progress-steps i {
-  flex: 1;
-  height: 4px;
-  border-radius: 2px;
-  background: #16322d;
-}
-
-#tickpilot-probe .tp-progress-steps i.done { background: #3dffc4; }
-#tickpilot-probe .tp-progress-steps i.active { background: #faad14; }
-
-#tickpilot-probe .tp-timeline-wrap {
-  border-top: 1px solid #16322d;
-  padding-top: 8px;
-  margin-top: 8px;
-}
-
-#tickpilot-probe .tp-tl-title {
-  margin: 0 0 6px;
-  color: #4d6f68;
-  font-size: 9px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-#tickpilot-probe .tp-timeline {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  max-height: 120px;
-  overflow: auto;
-}
-
-#tickpilot-probe .tp-timeline li {
-  padding: 3px 0;
+#tickpilot-hud .tp-hud-mode {
+  margin: 0 0 4px;
   font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+#tickpilot-hud .tp-mode-radar { color: #7ec8ff; }
+#tickpilot-hud .tp-mode-accelerate { color: #3dffc4; }
+#tickpilot-hud .tp-mode-armed { color: #c4b87a; }
+
+#tickpilot-hud .tp-hud-api {
+  margin: 0 0 6px;
+  color: #8fd4c4;
+  font-size: 11px;
   line-height: 1.35;
 }
 
-#tickpilot-probe .tp-timeline time {
-  color: #4d6f68;
+#tickpilot-hud .tp-hud-target {
+  margin: 0 0 6px;
+  color: #f0c14b;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+#tickpilot-hud .tp-hud-host {
+  margin: 0 0 6px;
+  color: #7f9a93;
+  font: 10px/1.3 Consolas, monospace;
+  word-break: break-all;
+}
+
+#tickpilot-hud .tp-hud-warn {
+  margin: 0 0 8px;
+  color: #f0c14b;
+  font-size: 11px;
+}
+
+#tickpilot-hud .tp-hud-log {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#tickpilot-hud .tp-hud-log li {
+  margin: 0 0 4px;
+  color: #b8d4cc;
+}
+
+#tickpilot-hud .tp-hud-log time {
+  color: #5a7a72;
   margin-right: 6px;
 }
 
-#tickpilot-probe .tp-tl-critical { color: #ff7875; }
-#tickpilot-probe .tp-tl-warn { color: #ffc53d; }
-#tickpilot-probe .tp-tl-info { color: #91caff; }
+#tickpilot-hud .tp-warn { color: #f0c14b; }
+#tickpilot-hud .tp-error { color: #ff7b7b; }
 
-#tickpilot-probe .tp-collapse {
-  margin-top: 8px;
-  width: 100%;
-  padding: 6px;
-  border: 1px solid #24574d;
-  background: #102820;
-  color: #7f9a93;
-  font-size: 10px;
-  cursor: pointer;
-}
-
-#tickpilot-probe.tp-compact .tp-grid,
-#tickpilot-probe.tp-compact .tp-note {
-  display: none;
+.tp-auto-click {
+  outline: 2px solid #3dffc4 !important;
+  outline-offset: 2px;
 }

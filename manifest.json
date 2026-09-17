@@ -1,16 +1,16 @@
 {
   "manifest_version": 3,
   "name": "TickPilot",
-  "version": "1.4.0",
-  "description": "AI-powered ticket buying automation for HKTicketing, KKTIX, Cityline, and URBTIX. Live auto-buy + mirror arena.",
+  "version": "2.4.0",
+  "description": "HKTicketing stock radar during queue + post-queue accelerator for fast tier pick after redirect.",
   "permissions": ["storage", "tabs", "notifications"],
   "host_permissions": [
-    "https://*.cityline.com/*",
     "https://*.kktix.com/*",
     "https://*.kktix.cc/*",
-    "https://*.urbtix.hk/*",
-    "https://ticket.urbtix.hk/*",
-    "https://*.hkticketing.com/*"
+    "https://*.hkticketing.com/*",
+    "https://*.hkticketing.com.hk/*",
+    "https://hkticketing.com.hk/*",
+    "https://rest-sig.imaitix.com/*"
   ],
   "background": {
     "service_worker": "background.js"
@@ -32,14 +32,13 @@
   "content_scripts": [
     {
       "matches": [
-        "https://*.cityline.com/*",
         "https://*.kktix.com/*",
         "https://*.kktix.cc/*",
-        "https://*.urbtix.hk/*",
-        "https://ticket.urbtix.hk/*",
-        "https://*.hkticketing.com/*"
+        "https://*.hkticketing.com/*",
+        "https://*.hkticketing.com.hk/*",
+        "https://hkticketing.com.hk/*"
       ],
-      "js": ["lib/live-assist.js", "lib/live-auto.js", "content.js"],
+      "js": ["lib/event-patches.js", "lib/hkt-api.js", "lib/live-auto.js", "content.js"],
       "css": ["content.css"],
       "run_at": "document_idle"
     }
